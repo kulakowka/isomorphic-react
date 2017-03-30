@@ -71,11 +71,15 @@ module.exports = {
     ]
   },
 
+  // performance: {
+  //   hints: 'warning'
+  // },
+  stats: 'errors-only',
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
+    }),
     new webpack.HotModuleReplacementPlugin(),
-    // enable HMR globally
-
     new webpack.NamedModulesPlugin()
-    // prints more readable module names in the browser console on HMR updates
   ]
 }

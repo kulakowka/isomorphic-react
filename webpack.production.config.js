@@ -40,7 +40,10 @@ module.exports = {
       }
     ]
   },
-
+  performance: {
+    hints: 'error'
+  },
+  stats: 'errors-only',
   plugins: [
     new webpack.LoaderOptionsPlugin({
       minimize: true,

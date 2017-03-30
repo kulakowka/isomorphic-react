@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start:client": "webpack-dev-server --config webpack.development.config.js",
+    "start:client": "webpack-dev-server --config webpack.development.config.js --progress",
     "start:server": "nodemon src/server.js --exec babel-node --presets=env,react",
     "build:client": "webpack --config webpack.production.config.js --progress",
     "build:server": "babel src -d build --presets=env,react",
