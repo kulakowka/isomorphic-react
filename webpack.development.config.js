@@ -40,6 +40,8 @@ module.exports = {
     port: 3001,
     contentBase: resolve(__dirname, 'public'),
     publicPath: '/',
+    compress: true,
+    noInfo: false,
     overlay: {
       warnings: true,
       errors: true
@@ -75,6 +77,7 @@ module.exports = {
   //   hints: 'warning'
   // },
   stats: 'errors-only',
+  bail: true,
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')

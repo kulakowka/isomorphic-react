@@ -1,24 +1,27 @@
 const { resolve } = require('path')
 const webpack = require('webpack')
+const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin')
+const WebpackChunkHash = require('webpack-chunk-hash')
 
 module.exports = {
   context: resolve(__dirname, 'src'),
-
-  entry: [
-    './client.js'
-  ],
-  output: {
-    filename: 'bundle.js',
-    // the output bundle
-
-    path: resolve(__dirname, 'public'),
-
-    publicPath: '/'
-    // necessary for HMR to know where to load the hot update chunks
+  entry: {
+    vendor: [
+      'react',
+      'react-dom',
+      'react-router',
+      'react-router-dom',
+      'react-hot-loader'
+    ],
+    main: './client.js'
   },
-
+  output: {
+    filename: '[name].[chunkhash].js',
+    chunkFilename: '[name].[chunkhash].js',
+    path: resolve(__dirname, 'public'),
+    publicPath: '/'
+  },
   devtool: 'cheap-module-source-map',
-
   module: {
     rules: [
       {
@@ -43,8 +46,18 @@ module.exports = {
   performance: {
     hints: 'error'
   },
-  stats: 'errors-only',
+  // stats: 'errors-only',
   plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: ['vendor', 'manifest'], // vendor libs + extracted manifest
+      minChunks: Infinity
+    }),
+    new webpack.HashedModuleIdsPlugin(),
+    new WebpackChunkHash(),
+    new ChunkManifestPlugin({
+      filename: 'chunk-manifest.json',
+      manifestVariable: 'webpackManifest'
+    }),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false
