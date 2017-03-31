@@ -3,10 +3,21 @@ import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { StaticRouter } from 'react-router'
 import App from './components/App'
+import manifest from '../public/manifest.json'
+import { resolve } from 'path'
 
 express()
+.use(express.static(resolve(__dirname, '../public')))
 .use(handleRequest)
 .listen(3000)
+
+function getAssetsPath () {
+  if (process.env.NODE_ENV === 'production') {
+    return `<script src="/${manifest['vendor.js']}"></script>
+    <script src="/${manifest['main.js']}"></script>`
+  }
+  return '<script src="/bundle.js"></script>'
+}
 
 function handleRequest (req, res, next) {
   const context = {}
@@ -39,7 +50,7 @@ function handleRequest (req, res, next) {
     </head>
     <body>
       <div id="root">${html}</div>
-      <script src="/bundle.js"></script>
+      ${getAssetsPath()}
     </body>
     </html>
   `)
