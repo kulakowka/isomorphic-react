@@ -3,7 +3,6 @@ import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { StaticRouter } from 'react-router'
 import App from './components/App'
-import manifest from '../public/manifest.json'
 import { resolve } from 'path'
 
 express()
@@ -13,6 +12,7 @@ express()
 
 function getAssetsPath () {
   if (process.env.NODE_ENV === 'production') {
+    const manifest = require('../public/manifest.json')
     return `<script src="/${manifest['vendor.js']}"></script>
     <script src="/${manifest['main.js']}"></script>`
   }
