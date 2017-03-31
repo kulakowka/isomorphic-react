@@ -4,11 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start:client": "webpack-dev-server --config webpack.development.config.js --progress",
-    "start:server": "nodemon src/server.js --exec babel-node --presets=env,react",
+    "start": "",
+    
+    "client": "webpack-dev-server --config webpack.development.config.js --progress",
+    "server": "nodemon src/server.js --exec babel-node --presets=env,react",
+
     "build:client": "rm -rf public && webpack --config webpack.production.config.js --progress",
     "build:server": "babel src -d build --presets=env,react",
-    "server": "node build/server.js"
+    "prod:server": "node build/server.js"
   },
   "dependencies": {
     "babel-cli": "^6.24.0",
@@ -27,8 +30,10 @@
     "react-dom": "^15.4.2",
     "react-helmet": "^5.0.2",
     "react-hot-loader": "next",
+    "react-redux": "^5.0.3",
     "react-router": "^4.0.0",
     "react-router-dom": "^4.0.0",
+    "redux": "^3.6.0",
     "style-loader": "^0.16.1",
     "webpack": "^2.3.2",
     "webpack-chunk-hash": "^0.4.0",
