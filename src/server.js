@@ -9,6 +9,7 @@ import { StaticRouter } from 'react-router'
 import App from './components/App'
 import { resolve } from 'path'
 import { matchPath } from 'react-router-dom'
+import {SheetsRegistryProvider, SheetsRegistry} from 'react-jss'
 
 express()
 .use(express.static(resolve(__dirname, '../public')))
@@ -27,6 +28,8 @@ function getAssetsPath () {
 function handleRequest (req, res, next) {
   const context = {}
 
+  const sheets = new SheetsRegistry()
+
   // inside a request
   const promises = []
   // use `some` to imitate `<Switch>` behavior of selecting only
@@ -34,7 +37,6 @@ function handleRequest (req, res, next) {
   routes.some(route => {
     // use `matchPath` here
     const match = matchPath(req.url, route)
-    console.log('match', match)
     if (match) promises.push(route.component.loadData(match))
     return match
   })
@@ -56,18 +58,18 @@ function handleRequest (req, res, next) {
           location={req.url}
           context={context}
         >
-          <App />
+          <SheetsRegistryProvider registry={sheets}>
+            <App />
+          </SheetsRegistryProvider>
         </StaticRouter>
       </Provider>
     )
 
     if (context.status) {
-      console.log('status', context)
       res.status(context.status)
     }
 
     if (context.url) {
-      console.log('redirect', context)
       res.redirect(301, context.url)
     }
 
@@ -75,21 +77,24 @@ function handleRequest (req, res, next) {
     const finalState = store.getState()
 
     // Send the rendered page back to the client
-    res.send(renderFullPage(html, finalState))
+    res.send(renderFullPage({ sheets, html, finalState }))
   })
 }
 
-function renderFullPage (html, preloadedState) {
+function renderFullPage ({ sheets, html, finalState }) {
   return `
     <!doctype html>
     <html>
       <head>
         <title>Redux Universal Example</title>
+        <style type="text/css" id="server-side-styles">
+          ${sheets.toString()}
+        </style>
       </head>
       <body>
         <div id="root">${html}</div>
         <script>
-          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
+          window.__PRELOADED_STATE__ = ${JSON.stringify(finalState)}
         </script>
         ${getAssetsPath()}
       </body>

@@ -1,9 +1,14 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-const Home = () => (
-  <p>Home 1</p>
+const Home = ({ counter }) => (
+  <p>Home {counter}</p>
 )
 
 Home.loadData = (match) => Promise.resolve({ data: 1, match })
 
-export default Home
+export default connect(
+  (state, props) => ({
+    counter: state.counter
+  }),
+)(Home)

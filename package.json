@@ -5,10 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "",
-    
     "client": "webpack-dev-server --config webpack.development.config.js --progress",
     "server": "nodemon src/server.js --exec babel-node --presets=env,react",
-
     "build:client": "rm -rf public && webpack --config webpack.production.config.js --progress",
     "build:server": "babel src -d build --presets=env,react",
     "prod:server": "node build/server.js"
@@ -24,12 +22,15 @@
     "chunk-manifest-webpack-plugin": "^1.0.0",
     "css-loader": "^0.28.0",
     "express": "^4.15.2",
+    "jss": "^6.5.0",
+    "jss-preset-default": "^1.3.1",
     "nodemon": "^1.11.0",
     "postcss-loader": "^1.3.3",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-helmet": "^5.0.2",
     "react-hot-loader": "next",
+    "react-jss": "^5.4.1",
     "react-redux": "^5.0.3",
     "react-router": "^4.0.0",
     "react-router-dom": "^4.0.0",

@@ -6,6 +6,11 @@ import reducers from './reducers'
 import { BrowserRouter } from 'react-router-dom'
 import { AppContainer } from 'react-hot-loader'
 import App from './components/App'
+import jss from 'jss'
+import preset from 'jss-preset-default'
+
+// One time setup with default plugins and settings.
+jss.setup(preset())
 
 // Grab the state from a global variable injected into the server-generated HTML
 const preloadedState = window.__PRELOADED_STATE__
