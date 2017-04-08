@@ -23,6 +23,7 @@ module.exports = {
       components: resolve(__dirname, '../../src/shared/components/**/[A-Z]*.js')
     }
   ],
+  skipComponentsWithoutExample: true,
   styles: {
     Markdown: {
       blockquote: {
