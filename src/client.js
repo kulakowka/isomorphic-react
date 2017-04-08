@@ -34,7 +34,12 @@ const render = (Component) => {
         </BrowserRouter>
       </Provider>
     </AppContainer>,
-    document.getElementById('root')
+    document.getElementById('root'),
+    () => {
+      // We don't need the static css any more once we have launched our application.
+      const ssStyles = document.getElementById('server-side-styles')
+      ssStyles.parentNode.removeChild(ssStyles)
+    }
   )
 }
 
