@@ -1,4 +1,4 @@
-import Home from './components/Home/Home'
+import Home from './containers/Home'
 import About from './components/About/About'
 import User from './components/User/User'
 

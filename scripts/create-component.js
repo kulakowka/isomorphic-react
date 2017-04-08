@@ -41,7 +41,8 @@ function createIndexFile ({ name }) {
 }
 
 function createComponentFile ({ name }) {
-  const template = `import React, { PropTypes } from 'react'
+  const template = `import React from 'react'
+import PropTypes from 'prop-types'
 import injectSheet from 'react-jss'
 
 /**

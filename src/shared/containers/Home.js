@@ -5,4 +5,7 @@ export default connect(
   (state, props) => ({
     counter: state.counter
   }),
+  (dispatch, props) => ({
+    incrementCounter: () => dispatch({ type: 'INCREMENT' })
+  })
 )(Home)
