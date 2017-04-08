@@ -13,7 +13,6 @@ module.exports = {
   webpackConfig: require('../webpack/development.js'),
   highlightTheme: 'material',
   serverHost: 'localhost',
-  styleguideDir: 'styleguide',
   showSidebar: true,
   serverPort: 6060,
   showCode: false,
@@ -23,6 +22,7 @@ module.exports = {
       components: resolve(__dirname, '../../src/shared/components/**/[A-Z]*.js')
     }
   ],
+  styleguideDir: resolve(__dirname, '../../build/static/styleguide'),
   skipComponentsWithoutExample: true,
   styles: {
     Markdown: {
