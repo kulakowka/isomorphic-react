@@ -9,7 +9,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { AppContainer } from 'react-hot-loader'
 import jss from 'jss'
 import preset from 'jss-preset-default'
-import App from '../shared/components/App'
+import App from '../shared'
 
 // One time setup with default plugins and settings.
 jss.setup(preset())
@@ -46,7 +46,7 @@ const render = (Component) => {
 render(App)
 
 if (module.hot) {
-  module.hot.accept('../shared/components/App', () => render(App))
+  module.hot.accept('../shared', () => render(App))
   module.hot.accept('../shared/reducers', () => {
     const nextRootReducer = require('../shared/reducers').default
     store.replaceReducer(nextRootReducer)

@@ -9,7 +9,9 @@
     "server": "nodemon src/server/index.js --exec babel-node --presets=env,react",
     "build:client": "NODE_ENV=production rm -rf public && webpack --config webpack.production.config.js --progress",
     "build:server": "NODE_ENV=production babel src -d build --presets=env,react",
-    "prod:server": "NODE_ENV=production node build/server.js"
+    "prod:server": "NODE_ENV=production node build/server.js",
+    "styleguide": "styleguidist server --config config/styleguidist/config.js",
+    "styleguide:build": "styleguidist build --config config/styleguidist/config.js"
   },
   "dependencies": {
     "babel-cli": "^6.24.0",
@@ -38,5 +40,8 @@
     "webpack-chunk-hash": "^0.4.0",
     "webpack-dev-server": "^2.4.2",
     "webpack-manifest-plugin": "^1.1.0"
+  },
+  "devDependencies": {
+    "react-styleguidist": "^5.0.6"
   }
 }

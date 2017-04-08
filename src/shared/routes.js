@@ -1,6 +1,6 @@
-import Home from './components/Home'
-import About from './components/About'
-import User from './components/User'
+import Home from './components/Home/Home'
+import About from './components/About/About'
+import User from './components/User/User'
 
 const routes = [
   { path: '/',
