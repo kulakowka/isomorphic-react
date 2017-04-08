@@ -30,7 +30,7 @@ const App = ({ classes }) => (
 
 const styles = {
   header: {
-    background: '#ccc'
+    background: 'pink'
   },
   '@global': {
     body: {

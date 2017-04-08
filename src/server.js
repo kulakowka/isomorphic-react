@@ -14,15 +14,15 @@ import {SheetsRegistryProvider, SheetsRegistry} from 'react-jss'
 express()
 .use(express.static(resolve(__dirname, '../public')))
 .use(handleRequest)
-.listen(3000)
+.listen(3001)
 
 function getAssetsPath () {
   if (process.env.NODE_ENV === 'production') {
     const manifest = require('../public/manifest.json')
-    return `<script src="/${manifest['vendor.js']}"></script>
-    <script src="/${manifest['main.js']}"></script>`
+    return `<script src="/static/${manifest['vendor.js']}"></script>
+    <script src="/static/${manifest['main.js']}"></script>`
   }
-  return '<script src="/bundle.js"></script>'
+  return '<script src="/static/bundle.js"></script>'
 }
 
 function handleRequest (req, res, next) {

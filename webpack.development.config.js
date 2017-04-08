@@ -2,34 +2,19 @@ const { resolve } = require('path')
 const webpack = require('webpack')
 
 module.exports = {
-  context: resolve(__dirname, 'src'),
+  // context: resolve(__dirname, 'src'),
   entry: [
     'react-hot-loader/patch',
-    'webpack-dev-server/client?http://localhost:3001',
+    'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
-    './client.js'
+    './src/client.js'
   ],
   output: {
     filename: 'bundle.js',
     path: resolve(__dirname, 'public'),
-    publicPath: '/'
+    publicPath: '/static/'
   },
   devtool: 'inline-source-map',
-  devServer: {
-    hot: true,
-    proxy: {
-      '*': 'http://localhost:3000'
-    },
-    port: 3001,
-    contentBase: resolve(__dirname, 'public'),
-    publicPath: '/',
-    compress: true,
-    noInfo: false,
-    overlay: {
-      warnings: true,
-      errors: true
-    }
-  },
   module: {
     rules: [
       {
@@ -40,6 +25,7 @@ module.exports = {
           options: {
             presets: [
               ['env', {
+                modules: false,
                 targets: {
                   chrome: 50,
                   edge: 12,
@@ -61,10 +47,6 @@ module.exports = {
             ]
           }
         }]
-      },
-      {
-        test: /\.css$/,
-        use: [ 'style-loader', 'css-loader?modules', 'postcss-loader' ]
       }
     ]
   },
@@ -78,6 +60,24 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify('development')
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin()
-  ]
+    new webpack.NamedModulesPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
+  ],
+
+  devServer: {
+    host: 'localhost',
+    port: 3000,
+    historyApiFallback: true,
+    hot: true,
+    proxy: {
+      '*': 'http://localhost:3001'
+    },
+    // publicPath: '/',
+    // compress: true,
+    // noInfo: false,
+    // overlay: {
+    //   warnings: true,
+    //   errors: true
+    // }
+  }
 }

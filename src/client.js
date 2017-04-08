@@ -1,13 +1,15 @@
+
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import reducers from './reducers'
 import { BrowserRouter } from 'react-router-dom'
 import { AppContainer } from 'react-hot-loader'
-import App from './components/App'
 import jss from 'jss'
 import preset from 'jss-preset-default'
+import App from './components/App'
 
 // One time setup with default plugins and settings.
 jss.setup(preset())
@@ -19,9 +21,9 @@ const preloadedState = window.__PRELOADED_STATE__
 delete window.__PRELOADED_STATE__
 
 // Create Redux store with initial state
-const store = createStore(reducers, preloadedState)
-
-console.log('state', store.getState())
+const store = createStore(reducers, preloadedState, composeWithDevTools(
+  applyMiddleware()
+))
 
 const render = (Component) => {
   ReactDOM.render(
@@ -39,7 +41,9 @@ const render = (Component) => {
 render(App)
 
 if (module.hot) {
-  module.hot.accept('./components/App', () => {
-    render(App)
+  module.hot.accept('./components/App', () => render(App))
+  module.hot.accept('./reducers', () => {
+    const nextRootReducer = require('./reducers').default
+    store.replaceReducer(nextRootReducer)
   })
 }
