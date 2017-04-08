@@ -25,6 +25,7 @@
     "babel-preset-react": "^6.24.1",
     "chalk": "^1.1.3",
     "chunk-manifest-webpack-plugin": "^1.0.0",
+    "classnames": "^2.2.5",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^10.2.0",
     "eslint-config-standard-react": "^4.3.0",
