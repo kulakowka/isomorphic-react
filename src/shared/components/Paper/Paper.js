@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import injectSheet from 'react-jss'
 import cx from 'classnames'
+import { DEFAULT_FONT } from '../../theme'
+
 /**
  * A Paper component.
  */
@@ -22,9 +24,9 @@ function Paper (props) {
   )
 
   return (
-    <div className={classNames}>
+    <section className={classNames}>
       {children}
-    </div>
+    </section>
   )
 }
 
@@ -57,7 +59,8 @@ const styles = {
     'padding': '1rem',
     'align-items': 'center',
     'min-width': '30px',
-    'min-height': '30px'
+    'min-height': '30px',
+    'font-family': DEFAULT_FONT
   },
   circle: {
     'border-radius': '50%',

@@ -27,11 +27,6 @@ Header.propTypes = {
 const styles = {
   root: {
     background: 'pink'
-  },
-  '@global': {
-    body: {
-      color: '#333'
-    }
   }
 }
 

@@ -16,6 +16,7 @@ module.exports = {
   showSidebar: true,
   serverPort: 6060,
   showCode: false,
+  template: resolve(__dirname, 'index.html'),
   sections: [
     {
       name: 'Components',
