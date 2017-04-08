@@ -4,9 +4,11 @@ import ReactDOMServer from 'react-dom/server'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducers from './reducers'
+import routes from './routes'
 import { StaticRouter } from 'react-router'
 import App from './components/App'
 import { resolve } from 'path'
+import { matchPath } from 'react-router-dom'
 
 express()
 .use(express.static(resolve(__dirname, '../public')))
@@ -25,40 +27,56 @@ function getAssetsPath () {
 function handleRequest (req, res, next) {
   const context = {}
 
-  const counter = parseInt(req.query.counter, 10) || 0
+  // inside a request
+  const promises = []
+  // use `some` to imitate `<Switch>` behavior of selecting only
+  // the first to match
+  routes.some(route => {
+    // use `matchPath` here
+    const match = matchPath(req.url, route)
+    console.log('match', match)
+    if (match) promises.push(route.component.loadData(match))
+    return match
+  })
 
-  // Compile an initial state
-  let preloadedState = { counter }
+  Promise.all(promises).then(data => {
+    // do something w/ the data so the client
+    // can access it then render the app
+    const counter = parseInt(req.query.counter, 10) || 0
 
-  // Create a new Redux store instance
-  const store = createStore(reducers, preloadedState)
+    // Compile an initial state
+    let preloadedState = { counter, data }
 
-  const html = ReactDOMServer.renderToString(
-    <Provider store={store}>
-      <StaticRouter
-        location={req.url}
-        context={context}
-      >
-        <App />
-      </StaticRouter>
-    </Provider>
-  )
+    // Create a new Redux store instance
+    const store = createStore(reducers, preloadedState)
 
-  if (context.status) {
-    console.log('status', context)
-    res.status(context.status)
-  }
+    const html = ReactDOMServer.renderToString(
+      <Provider store={store}>
+        <StaticRouter
+          location={req.url}
+          context={context}
+        >
+          <App />
+        </StaticRouter>
+      </Provider>
+    )
 
-  if (context.url) {
-    console.log('redirect', context)
-    res.redirect(301, context.url)
-  }
+    if (context.status) {
+      console.log('status', context)
+      res.status(context.status)
+    }
 
-  // Grab the initial state from our Redux store
-  const finalState = store.getState()
+    if (context.url) {
+      console.log('redirect', context)
+      res.redirect(301, context.url)
+    }
 
-  // Send the rendered page back to the client
-  res.send(renderFullPage(html, finalState))
+    // Grab the initial state from our Redux store
+    const finalState = store.getState()
+
+    // Send the rendered page back to the client
+    res.send(renderFullPage(html, finalState))
+  })
 }
 
 function renderFullPage (html, preloadedState) {

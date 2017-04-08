@@ -1,24 +1,8 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
-
-const Home = () => (
-  <p>Home 1</p>
-)
-const About = () => <p>About</p>
-
-const Status = ({ code, children }) => (
-  <Route render={({ staticContext }) => {
-    if (staticContext) staticContext.status = code
-    return children
-  }} />
-)
-
-const NotFound = () => (
-  <Status code={404}>
-    <p>Not Found</p>
-  </Status>
-)
+import NotFound from './NotFound'
+import routes from '../routes'
 
 export default function App () {
   return (
@@ -31,10 +15,13 @@ export default function App () {
         <Link to='/old'>old</Link>
         {' | '}
         <Link to='/asdas'>404</Link>
+        {' | '}
+        <Link to='/users/kulakowka'>user</Link>
       </header>
       <Switch>
-        <Route exact path='/' component={Home} />
-        <Route path='/about' component={About} />
+        {routes.map(route => (
+          <Route {...route} key={route.path} />
+        ))}
         <Redirect from='/old' to='/about' />
         <Route component={NotFound} />
       </Switch>
