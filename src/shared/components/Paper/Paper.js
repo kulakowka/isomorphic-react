@@ -17,7 +17,7 @@ function Paper (props) {
   } = props
 
   const classNames = cx(
-    classes.root,
+    classes.paper,
     circle && classes.circle,
     rounded && classes.rounded,
     zDepth && classes[`zDepth${zDepth}`]
@@ -52,7 +52,7 @@ Paper.defaultProps = {
 }
 
 const styles = {
-  root: {
+  paper: {
     'background-color': 'white',
     'transition': '.3s',
     '-webkit-tap-highlight-color': 'rgba(0, 0, 0, 0)',

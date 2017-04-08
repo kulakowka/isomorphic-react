@@ -1,19 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import Button from '../Button'
 import injectSheet from 'react-jss'
 
 const Header = ({ classes }) => (
-  <header className={classes.root}>
-    <Link to='/'>home</Link>
-    {' | '}
-    <Link to='/about'>about</Link>
-    {' | '}
-    <Link to='/old'>old</Link>
-    {' | '}
-    <Link to='/asdas'>404</Link>
-    {' | '}
-    <Link to='/users/kulakowka'>user</Link>
+  <header className={classes.header}>
+    <Button href='/'>home</Button>
+    <Button href='/about'>about</Button>
+    <Button href='/old'>old</Button>
+    <Button href='/asdas'>404</Button>
+    <Button href='/users/kulakowka'>user</Button>
   </header>
 )
 
@@ -25,8 +21,9 @@ Header.propTypes = {
 }
 
 const styles = {
-  root: {
-    background: 'pink'
+  header: {
+    display: 'flex',
+    justifyContent: 'space-start'
   }
 }
 

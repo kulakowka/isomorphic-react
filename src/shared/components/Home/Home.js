@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Paper from '../Paper'
+import Button from '../Button'
 
 /**
  * A home page root comoponent
@@ -9,9 +10,9 @@ const Home = ({ counter, incrementCounter }) => (
   <Paper>
     <h1>Home</h1>
     <p>{`Counter: ${counter} 2`}</p>
-    <button onClick={incrementCounter}>
+    <Button primary onClick={incrementCounter}>
       increment
-    </button>
+    </Button>
   </Paper>
 )
 
