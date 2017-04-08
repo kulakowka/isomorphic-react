@@ -7,7 +7,7 @@ const ManifestPlugin = require('webpack-manifest-plugin')
 module.exports = {
   // context: resolve(__dirname, 'src'),
   entry: {
-    main: './src/client.js'
+    main: './src/client/index.js'
   },
   output: {
     filename: '[name].[chunkhash].js',

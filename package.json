@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "",
-    "client": "webpack-dev-server --config webpack.development.config.js --progress",
-    "server": "nodemon src/server.js --exec babel-node --presets=env,react",
+    "client": "webpack-dev-server --config config/webpack/development.js --progress",
+    "server": "nodemon src/server/index.js --exec babel-node --presets=env,react",
     "build:client": "NODE_ENV=production rm -rf public && webpack --config webpack.production.config.js --progress",
     "build:server": "NODE_ENV=production babel src -d build --presets=env,react",
     "prod:server": "NODE_ENV=production node build/server.js"

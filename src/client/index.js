@@ -4,12 +4,12 @@ import ReactDOM from 'react-dom'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import reducers from './reducers'
+import reducers from '../shared/reducers'
 import { BrowserRouter } from 'react-router-dom'
 import { AppContainer } from 'react-hot-loader'
 import jss from 'jss'
 import preset from 'jss-preset-default'
-import App from './components/App'
+import App from '../shared/components/App'
 
 // One time setup with default plugins and settings.
 jss.setup(preset())
@@ -46,9 +46,9 @@ const render = (Component) => {
 render(App)
 
 if (module.hot) {
-  module.hot.accept('./components/App', () => render(App))
-  module.hot.accept('./reducers', () => {
-    const nextRootReducer = require('./reducers').default
+  module.hot.accept('../shared/components/App', () => render(App))
+  module.hot.accept('../shared/reducers', () => {
+    const nextRootReducer = require('../shared/reducers').default
     store.replaceReducer(nextRootReducer)
   })
 }

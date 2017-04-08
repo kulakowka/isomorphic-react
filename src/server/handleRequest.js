@@ -1,33 +1,16 @@
-import express from 'express'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import reducers from './reducers'
-import routes from './routes'
+import reducers from '../shared/reducers'
+import routes from '../shared/routes'
 import { StaticRouter } from 'react-router'
-import App from './components/App'
-import { resolve } from 'path'
+import App from '../shared/components/App'
 import { matchPath } from 'react-router-dom'
 import {SheetsRegistryProvider, SheetsRegistry} from 'react-jss'
+import renderFullPage from './renderFullPage'
 
-console.log(resolve(__dirname, 'static'))
-
-express()
-.use('/static', express.static(resolve(__dirname, 'static')))
-.use(handleRequest)
-.listen(3001)
-
-function getAssetsPath () {
-  if (process.env.NODE_ENV === 'production') {
-    const manifest = require('./static/manifest.json')
-    return `<script src="/static/${manifest['vendor.js']}"></script>
-    <script src="/static/${manifest['main.js']}"></script>`
-  }
-  return '<script src="/static/bundle.js"></script>'
-}
-
-function handleRequest (req, res, next) {
+export default function handleRequest (req, res, next) {
   const context = {}
 
   const sheets = new SheetsRegistry()
@@ -81,25 +64,4 @@ function handleRequest (req, res, next) {
     // Send the rendered page back to the client
     res.send(renderFullPage({ sheets, html, finalState }))
   })
-}
-
-function renderFullPage ({ sheets, html, finalState }) {
-  return `
-    <!doctype html>
-    <html>
-      <head>
-        <title>Redux Universal Example</title>
-        <style type="text/css" id="server-side-styles">
-          ${sheets.toString()}
-        </style>
-      </head>
-      <body>
-        <div id="root">${html}</div>
-        <script>
-          window.__PRELOADED_STATE__ = ${JSON.stringify(finalState)}
-        </script>
-        ${getAssetsPath()}
-      </body>
-    </html>
-    `
 }
