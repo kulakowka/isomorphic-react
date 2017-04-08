@@ -24,9 +24,9 @@ function Paper (props) {
   )
 
   return (
-    <section className={classNames}>
+    <div className={classNames}>
       {children}
-    </section>
+    </div>
   )
 }
 

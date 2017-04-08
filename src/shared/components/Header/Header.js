@@ -5,11 +5,11 @@ import injectSheet from 'react-jss'
 
 const Header = ({ classes }) => (
   <header className={classes.header}>
-    <Button href='/'>home</Button>
-    <Button href='/about'>about</Button>
-    <Button href='/old'>old</Button>
-    <Button href='/asdas'>404</Button>
-    <Button href='/users/kulakowka'>user</Button>
+    <Button rounded={false} href='/'>home</Button>
+    <Button rounded={false} href='/about'>about</Button>
+    <Button rounded={false} href='/old'>old</Button>
+    <Button rounded={false} href='/asdas'>404</Button>
+    <Button rounded={false} href='/users/kulakowka'>user</Button>
   </header>
 )
 

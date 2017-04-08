@@ -22,10 +22,10 @@ A positive and negative button.
 </div>
 ```
 
-A rounded button.
+A no rounded button.
 
 ```example
-<Button rounded content='Rounded' />
+<Button rounded={false} content='Rounded' />
 ```
 
 Sizes.

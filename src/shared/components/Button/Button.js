@@ -76,7 +76,8 @@ Button.propTypes = {
 }
 
 Button.defaultProps = {
-  size: 'default'
+  size: 'default',
+  rounded: true
 }
 
 const styles = {
@@ -91,11 +92,14 @@ const styles = {
     background: '#eee',
     color: '#222',
     textDecoration: 'none',
+    textTransform: 'uppercase',
     '&:hover': {
       background: '#ddd'
     },
     '&:focus': {
-      outline: 0,
+      outline: 0
+    },
+    '&:active': {
       boxShadow: '0 0 0 3px #ddd'
     }
   },
@@ -105,7 +109,7 @@ const styles = {
     '&:hover': {
       background: 'darkblue'
     },
-    '&:focus': {
+    '&:active': {
       boxShadow: '0 0 0 3px darkblue'
     }
   },
@@ -115,7 +119,7 @@ const styles = {
     '&:hover': {
       background: 'darkgreen'
     },
-    '&:focus': {
+    '&:active': {
       boxShadow: '0 0 0 3px darkgreen'
     }
   },
@@ -125,7 +129,7 @@ const styles = {
     '&:hover': {
       background: 'darkred'
     },
-    '&:focus': {
+    '&:active': {
       boxShadow: '0 0 0 3px darkred'
     }
   },
@@ -133,19 +137,19 @@ const styles = {
     borderRadius: '5px'
   },
   'small-size': {
-    padding: '5px 10px',
-    fontSize: '13px',
-    lineHeight: '13px'
-  },
-  'default-size': {
-    padding: '10px 15px',
+    padding: '15px 30px',
     fontSize: '16px',
     lineHeight: '16px'
   },
+  'default-size': {
+    padding: '20px 40px',
+    fontSize: '20px',
+    lineHeight: '20px'
+  },
   'big-size': {
-    padding: '15px 20px',
-    fontSize: '18px',
-    lineHeight: '18px'
+    padding: '30px 60px',
+    fontSize: '28px',
+    lineHeight: '28px'
   }
 }
 
