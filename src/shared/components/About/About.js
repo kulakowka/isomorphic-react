@@ -4,7 +4,11 @@ import Paper from '../Paper'
 /**
  * About page
  */
-const About = () => <Paper>About</Paper>
+const About = () => (
+  <Paper>
+    <h1>About</h1>
+  </Paper>
+)
 
 About.loadData = (match) => Promise.resolve({ data: 2, match })
 

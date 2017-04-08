@@ -4,7 +4,9 @@ import Paper from '../Paper'
 
 const NotFound = () => (
   <Status code={404}>
-    <Paper>Not Found</Paper>
+    <Paper>
+      <h1>Not Found</h1>
+    </Paper>
   </Status>
 )
 

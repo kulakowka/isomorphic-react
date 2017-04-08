@@ -56,7 +56,6 @@ const styles = {
     '-webkit-tap-highlight-color': 'rgba(0, 0, 0, 0)',
     'padding': '1rem',
     'align-items': 'center',
-    'display': 'flex',
     'min-width': '30px',
     'min-height': '30px'
   },
