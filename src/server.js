@@ -11,14 +11,16 @@ import { resolve } from 'path'
 import { matchPath } from 'react-router-dom'
 import {SheetsRegistryProvider, SheetsRegistry} from 'react-jss'
 
+console.log(resolve(__dirname, 'static'))
+
 express()
-.use(express.static(resolve(__dirname, '../public')))
+.use('/static', express.static(resolve(__dirname, 'static')))
 .use(handleRequest)
 .listen(3001)
 
 function getAssetsPath () {
   if (process.env.NODE_ENV === 'production') {
-    const manifest = require('../public/manifest.json')
+    const manifest = require('./static/manifest.json')
     return `<script src="/static/${manifest['vendor.js']}"></script>
     <script src="/static/${manifest['main.js']}"></script>`
   }

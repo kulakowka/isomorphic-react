@@ -2,7 +2,6 @@ const { resolve } = require('path')
 const webpack = require('webpack')
 
 module.exports = {
-  // context: resolve(__dirname, 'src'),
   entry: [
     'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:3000',
@@ -27,17 +26,10 @@ module.exports = {
               ['env', {
                 modules: false,
                 targets: {
-                  chrome: 50,
-                  edge: 12,
-                  ie: 10,
-                  firefox: 50,
-                  safari: 9,
-                  ios: 10,
-                  opera: 40
-                  // browsers: [
-                  //   'last 2 versions',
-                  //   'safari >= 7'
-                  // ]
+                  browsers: [
+                    'last 2 versions',
+                    'safari >= 7'
+                  ]
                 }
               }],
               'react'
@@ -50,9 +42,6 @@ module.exports = {
       }
     ]
   },
-  // performance: {
-  //   hints: 'warning'
-  // },
   stats: 'errors-only',
   bail: true,
   plugins: [
@@ -63,7 +52,6 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ],
-
   devServer: {
     host: 'localhost',
     port: 3000,
@@ -72,12 +60,9 @@ module.exports = {
     proxy: {
       '*': 'http://localhost:3001'
     },
-    // publicPath: '/',
-    // compress: true,
-    // noInfo: false,
-    // overlay: {
-    //   warnings: true,
-    //   errors: true
-    // }
+    overlay: {
+      warnings: true,
+      errors: true
+    }
   }
 }

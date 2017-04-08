@@ -5,21 +5,14 @@ const webpack = require('webpack')
 const ManifestPlugin = require('webpack-manifest-plugin')
 
 module.exports = {
-  context: resolve(__dirname, 'src'),
+  // context: resolve(__dirname, 'src'),
   entry: {
-    main: './client.js',
-    vendor: [
-      'react',
-      'react-dom',
-      'react-router',
-      'react-router-dom',
-      'react-hot-loader'
-    ]
+    main: './src/client.js'
   },
   output: {
     filename: '[name].[chunkhash].js',
-    path: resolve(__dirname, 'public'),
-    publicPath: '/'
+    path: resolve(__dirname, 'build/static'),
+    publicPath: '/static/'
   },
   devtool: 'cheap-module-source-map',
   module: {
@@ -31,21 +24,25 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: [
-              ['es2015', {'modules': false}],
+              ['env', {
+                modules: false,
+                targets: {
+                  browsers: [
+                    'last 2 versions',
+                    'safari >= 7'
+                  ]
+                }
+              }],
               'react'
             ]
           }
         }]
-      },
-      {
-        test: /\.css$/,
-        use: [ 'style-loader', 'css-loader?modules', 'postcss-loader' ]
       }
     ]
   },
-  performance: {
-    hints: 'error'
-  },
+  // performance: {
+  //   hints: 'error'
+  // },
   // stats: 'errors-only',
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({

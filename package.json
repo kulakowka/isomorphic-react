@@ -7,9 +7,9 @@
     "start": "",
     "client": "webpack-dev-server --config webpack.development.config.js --progress",
     "server": "nodemon src/server.js --exec babel-node --presets=env,react",
-    "build:client": "rm -rf public && webpack --config webpack.production.config.js --progress",
-    "build:server": "babel src -d build --presets=env,react",
-    "prod:server": "node build/server.js"
+    "build:client": "NODE_ENV=production rm -rf public && webpack --config webpack.production.config.js --progress",
+    "build:server": "NODE_ENV=production babel src -d build --presets=env,react",
+    "prod:server": "NODE_ENV=production node build/server.js"
   },
   "dependencies": {
     "babel-cli": "^6.24.0",
