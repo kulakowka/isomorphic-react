@@ -1,43 +1,42 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
+import NotFound from './NotFound'
+import routes from '../routes'
+import injectSheet from 'react-jss'
 
-const Home = () => (
-  <p>Home 1</p>
+const App = ({ classes }) => (
+  <div>
+    <header className={classes.header}>
+      <Link to='/'>home</Link>
+      {' | '}
+      <Link to='/about'>about</Link>
+      {' | '}
+      <Link to='/old'>old</Link>
+      {' | '}
+      <Link to='/asdas'>404</Link>
+      {' | '}
+      <Link to='/users/kulakowka'>user</Link>
+    </header>
+    <Switch>
+      {routes.map(route => (
+        <Route {...route} key={route.path} />
+      ))}
+      <Redirect from='/old' to='/about' />
+      <Route component={NotFound} />
+    </Switch>
+  </div>
 )
-const About = () => <p>About</p>
 
-const Status = ({ code, children }) => (
-  <Route render={({ staticContext }) => {
-    if (staticContext) staticContext.status = code
-    return children
-  }} />
-)
-
-const NotFound = () => (
-  <Status code={404}>
-    <p>Not Found</p>
-  </Status>
-)
-
-export default function App () {
-  return (
-    <div>
-      <header>
-        <Link to='/'>home</Link>
-        {' | '}
-        <Link to='/about'>about</Link>
-        {' | '}
-        <Link to='/old'>old</Link>
-        {' | '}
-        <Link to='/asdas'>404</Link>
-      </header>
-      <Switch>
-        <Route exact path='/' component={Home} />
-        <Route path='/about' component={About} />
-        <Redirect from='/old' to='/about' />
-        <Route component={NotFound} />
-      </Switch>
-    </div>
-  )
+const styles = {
+  header: {
+    background: '#ccc'
+  },
+  '@global': {
+    body: {
+      color: '#333'
+    }
+  }
 }
+
+export default injectSheet(styles)(App)

@@ -3,37 +3,20 @@ const webpack = require('webpack')
 
 module.exports = {
   context: resolve(__dirname, 'src'),
-
   entry: [
     'react-hot-loader/patch',
-    // activate HMR for React
-
     'webpack-dev-server/client?http://localhost:3001',
-    // bundle the client for webpack-dev-server
-    // and connect to the provided endpoint
-
     'webpack/hot/only-dev-server',
-    // bundle the client for hot reloading
-    // only- means to only hot reload for successful updates
-
     './client.js'
-    // the entry point of our app
   ],
   output: {
     filename: 'bundle.js',
-    // the output bundle
-
     path: resolve(__dirname, 'public'),
-
     publicPath: '/'
-    // necessary for HMR to know where to load the hot update chunks
   },
-
   devtool: 'inline-source-map',
-
   devServer: {
     hot: true,
-    // enable HMR on the server
     proxy: {
       '*': 'http://localhost:3000'
     },
@@ -47,7 +30,6 @@ module.exports = {
       errors: true
     }
   },
-
   module: {
     rules: [
       {
@@ -57,7 +39,21 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: [
-              ['es2015', {'modules': false}],
+              ['env', {
+                targets: {
+                  chrome: 50,
+                  edge: 12,
+                  ie: 10,
+                  firefox: 50,
+                  safari: 9,
+                  ios: 10,
+                  opera: 40
+                  // browsers: [
+                  //   'last 2 versions',
+                  //   'safari >= 7'
+                  // ]
+                }
+              }],
               'react'
             ],
             'plugins': [
@@ -72,7 +68,6 @@ module.exports = {
       }
     ]
   },
-
   // performance: {
   //   hints: 'warning'
   // },
