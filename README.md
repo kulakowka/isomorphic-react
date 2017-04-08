@@ -8,3 +8,12 @@
 - Server side rendering
 - React hot loader
 
+```bash
+npm run client
+npm run server
+npm run build:client
+npm run build:server
+npm run prod:server
+npm run styleguide
+npm run styleguide:build
+```
