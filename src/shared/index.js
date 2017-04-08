@@ -1,8 +1,7 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { Switch, Route, Redirect } from 'react-router'
-import { Link } from 'react-router-dom'
-import Header from './Header/Header'
-import NotFound from './NotFound/NotFound'
+import Header from './components/Header/Header'
+import NotFound from './components/NotFound/NotFound'
 import routes from './routes'
 
 /**

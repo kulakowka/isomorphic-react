@@ -7,6 +7,9 @@
 - JSS
 - Server side rendering
 - React hot loader
+- React Styleguidist
+- ES Lint
+- Standard.js
 
 ```bash
 npm run client
@@ -16,4 +19,6 @@ npm run build:server
 npm run prod:server
 npm run styleguide
 npm run styleguide:build
+npm run lint
+npm run cc
 ```

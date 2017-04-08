@@ -19,26 +19,29 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              ['env', {
-                modules: false,
-                targets: {
-                  browsers: [
-                    'last 2 versions',
-                    'safari >= 7'
-                  ]
-                }
-              }],
-              'react'
-            ],
-            'plugins': [
-              'react-hot-loader/babel'
-            ]
-          }
-        }]
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                ['env', {
+                  modules: false,
+                  targets: {
+                    browsers: [
+                      'last 2 versions',
+                      'safari >= 7'
+                    ]
+                  }
+                }],
+                'react'
+              ],
+              'plugins': [
+                'react-hot-loader/babel'
+              ]
+            }
+          },
+          'eslint-loader'
+        ]
       }
     ]
   },

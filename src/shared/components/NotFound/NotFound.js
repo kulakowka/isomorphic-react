@@ -1,12 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router'
-
-const Status = ({ code, children }) => (
-  <Route render={({ staticContext }) => {
-    if (staticContext) staticContext.status = code
-    return children
-  }} />
-)
+import Status from '../Status/Status'
 
 const NotFound = () => (
   <Status code={404}>
