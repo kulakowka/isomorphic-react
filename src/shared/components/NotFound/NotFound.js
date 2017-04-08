@@ -1,9 +1,10 @@
 import React from 'react'
-import Status from '../Status/Status'
+import Status from '../Status'
+import Paper from '../Paper'
 
 const NotFound = () => (
   <Status code={404}>
-    <p>Not Found</p>
+    <Paper>Not Found</Paper>
   </Status>
 )
 

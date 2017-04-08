@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router'
-import Header from './components/Header/Header'
-import NotFound from './components/NotFound/NotFound'
+import Header from './components/Header'
+import NotFound from './components/NotFound'
 import routes from './routes'
 
 /**

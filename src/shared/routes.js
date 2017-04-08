@@ -1,6 +1,6 @@
 import Home from './containers/Home'
-import About from './components/About/About'
-import User from './components/User/User'
+import About from './components/About'
+import User from './components/User'
 
 const routes = [
   { path: '/',
