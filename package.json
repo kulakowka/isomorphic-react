@@ -46,6 +46,7 @@
     "react-hot-loader": "^3.0.0-beta.6",
     "react-jss": "^5.4.1",
     "react-redux": "^5.0.3",
+    "react-ripple-effect": "^1.0.4",
     "react-router": "^4.0.0",
     "react-router-dom": "^4.0.0",
     "redux": "^3.6.0",

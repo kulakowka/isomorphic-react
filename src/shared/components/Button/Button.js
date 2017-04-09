@@ -1,53 +1,103 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import injectSheet from 'react-jss'
 import cx from 'classnames'
 import { Link } from 'react-router-dom'
 import { DEFAULT_FONT } from '../../theme'
+import Ripple from '../Ripple'
 
 /**
  * A Button component.
  */
-function Button (props) {
-  const {
-    children,
-    href,
-    content,
-    classes,
-    primary,
-    positive,
-    negative,
-    rounded,
-    size,
-    onClick
-  } = props
-
-  const classNames = cx(
-    classes.button,
-    primary && classes.primary,
-    positive && classes.positive,
-    negative && classes.negative,
-    rounded && classes.rounded,
-    size && classes[`${size}-size`]
-  )
-
-  const otherProps = {
-    onClick
+class Button extends Component {
+  constructor () {
+    super()
+    this.state = {
+      ripples: []
+    }
+    this.handleClick = this.handleClick.bind(this)
   }
+  handleClick (e, b) {
+    // console.log(e, b)
+    // console.log('this.button', this.button)
+    // console.log('event', e)
+    console.dir(e.currentTarget)
+    // Get Cursor Position
+    let cursorPos = {
+      top: e.clientY - e.currentTarget.offsetTop - 25,
+      left: e.clientX - e.currentTarget.offsetLeft - 25
+    }
+    // console.log('cursorPos', cursorPos, {
+    //   offsetLeft: this.button.offsetLeft,
+    //   offsetTop: this.button.offsetTop
+    // })
 
-  if (href) {
+    this.setState({
+      ripples: this.state.ripples.concat(<Ripple key={Date.now()} cursorPos={cursorPos} isVisible />)
+    })
+
+    setTimeout(() => {
+      this.setState({
+        ripples: this.state.ripples.filter((r, i) => !!i)
+      })
+    }, 1000)
+  }
+  render () {
+    const {
+      children,
+      href,
+      content,
+      classes,
+      primary,
+      positive,
+      negative,
+      rounded,
+      size,
+      onClick
+    } = this.props
+
+    const classNames = cx(
+      classes.button,
+      primary && classes.primary,
+      positive && classes.positive,
+      negative && classes.negative,
+      rounded && classes.rounded,
+      size && classes[`${size}-size`]
+    )
+
+    const otherProps = {
+      onClick
+    }
+
+    if (href) {
+      return (
+        <Link
+          to={href}
+          ref={button => { this.button = button }}
+          className={classNames}
+          {...otherProps}
+          onMouseUp={this.handleClick}
+          onTouchEnd={this.handleClick}
+        >
+          {content || children}
+          {this.state.ripples}
+        </Link>
+      )
+    }
+
     return (
-      <Link to={href} className={classNames} {...otherProps}>
+      <button
+        ref={button => { this.button = button }}
+        className={classNames}
+        {...otherProps}
+        onMouseUp={this.handleClick}
+        onTouchEnd={this.handleClick}
+      >
         {content || children}
-      </Link>
+        {this.state.ripples}
+      </button>
     )
   }
-
-  return (
-    <button className={classNames} {...otherProps}>
-      {content || children}
-    </button>
-  )
 }
 
 Button.displayName = 'Button'
@@ -83,54 +133,69 @@ Button.defaultProps = {
 const styles = {
   button: {
     fontFamily: DEFAULT_FONT,
+    position: 'relative',
+    overflow: 'hidden',
     display: 'inline-flex',
     padding: 0,
     margin: 0,
     border: 0,
     cursor: 'pointer',
     userSelect: 'none',
-    background: '#eee',
+    background: '#ddd',
     color: '#222',
     textDecoration: 'none',
     textTransform: 'uppercase',
-    '&:hover': {
-      background: '#ddd'
-    },
+    'box-shadow': '0 9px 3px 0px rgba(0,0,0,0.15)',
+    transition: '0.1s all',
     '&:focus': {
       outline: 0
     },
+    '&:hover': {
+      background: '#eee',
+      // boxShadow: '0 0 0 3px #ddd',
+      'box-shadow': '0 5px 3px 0px rgba(0,0,0,0.1)',
+      transform: 'scale(1.1)',
+      position: 'relative',
+      zIndex: 2
+      // transform: 'translateY(4px)'
+    },
     '&:active': {
-      boxShadow: '0 0 0 3px #ddd'
+      background: '#ddd',
+      transform: 'scale(1)',
+      'box-shadow': '0 9px 3px 0px rgba(0,0,0,0.15)'
     }
   },
   primary: {
-    background: 'blue',
+    background: 'darkblue',
     color: 'white',
     '&:hover': {
-      background: 'darkblue'
+      background: 'blue'
     },
     '&:active': {
-      boxShadow: '0 0 0 3px darkblue'
+      background: 'darkblue'
+      // boxShadow: '0 0 0 3px darkblue'
     }
   },
   positive: {
-    background: 'green',
+    background: '#3e8e41',
     color: 'white',
     '&:hover': {
-      background: 'darkgreen'
+      background: '#4CAF50'
     },
     '&:active': {
-      boxShadow: '0 0 0 3px darkgreen'
+      background: '#3e8e41'
+      // boxShadow: '0 0 0 3px darkgreen'
     }
   },
   negative: {
-    background: 'red',
+    background: 'darkred',
     color: 'white',
     '&:hover': {
-      background: 'darkred'
+      background: 'red'
     },
     '&:active': {
-      boxShadow: '0 0 0 3px darkred'
+      background: 'darkred'
+      // boxShadow: '0 0 0 3px darkred'
     }
   },
   rounded: {

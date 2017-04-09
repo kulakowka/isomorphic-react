@@ -4798,7 +4798,7 @@ react-docgen@^2.13.0:
     node-dir "^0.1.10"
     recast "^0.11.5"
 
-react-dom@^15.5.3:
+react-dom@^15.0.2, react-dom@^15.5.3:
   version "15.5.3"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.5.3.tgz#2ee127ce942df55da53111ae303316e68072b5c5"
   dependencies:
@@ -4853,6 +4853,13 @@ react-redux@^5.0.3:
     lodash "^4.2.0"
     lodash-es "^4.2.0"
     loose-envify "^1.1.0"
+
+react-ripple-effect@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-ripple-effect/-/react-ripple-effect-1.0.4.tgz#63a4e5b2779d26e2845ffe47b0b292cc58208bf5"
+  dependencies:
+    react "^15.0.2"
+    react-dom "^15.0.2"
 
 react-router-dom@^4.0.0:
   version "4.0.0"
@@ -4926,7 +4933,7 @@ react-styleguidist@^5.0.6:
     webpack-dev-server "^1.16.3"
     webpack-merge "^4.1.0"
 
-react@^15.5.3:
+react@^15.0.2, react@^15.5.3:
   version "15.5.3"
   resolved "https://registry.yarnpkg.com/react/-/react-15.5.3.tgz#84055382c025dec4e3b902bb61a8697cc79c1258"
   dependencies:
